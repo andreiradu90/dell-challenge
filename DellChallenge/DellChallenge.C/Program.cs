@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace DellChallenge.C
 {
@@ -16,24 +17,20 @@ namespace DellChallenge.C
 
         private static void StartHere()
         {
-            myObject _MyNewObject = new myObject();
-            int obj1 = _MyNewObject.Do(1, 3);
-            int num2 = _MyNewObject.DoExtended(1, 3, 5);
-            Console.WriteLine(obj1);
+            // local variables should have some consistency and a name that hints at their purpose
+            int num1 = MyCalculator.Sum(1, 3);
+            int num2 = MyCalculator.Sum(1, 3, 5);
+            Console.WriteLine(num1);
             Console.WriteLine(num2);
         }
     }
-
-    class myObject
+    // no reason for this not to be static
+    // class name should hint at its purpose
+    static class MyCalculator
     {
-
-        public int Do(int a, int b)
+        public static int Sum(params int[] input)// it can accept any number of parameters; method overload would also be fine(same name, different signature)
         {
-            return a + b;
-        }
-
-        public int DoExtended(int a, int b, int c)
-        { return a + b + c;
+            return input.Sum();
         }
     }
 }

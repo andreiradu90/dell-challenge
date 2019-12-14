@@ -7,6 +7,13 @@ namespace DellChallenge.A
         static void Main(string[] args)
         {
             // State and explain console output order.
+            // Constructor chaining identifies the base parameterless constructor, hence A.() then B.()
+            // A.Age is then printed by setting the Age Parameter in class B constructor
+            // The order is:
+            // A.A()
+            // B.B()
+            // A.Age
+
             new B();
             Console.ReadKey();
         }
@@ -34,7 +41,7 @@ namespace DellChallenge.A
 
     class B : A
     {
-        public B()
+        public B()//the same as: "public B() : base()", where base() is called first
         {
             Console.WriteLine("B.B()");
             Age = 0;

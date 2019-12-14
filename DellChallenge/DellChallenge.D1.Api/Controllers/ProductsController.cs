@@ -26,9 +26,9 @@ namespace DellChallenge.D1.Api.Controllers
 
         [HttpGet("{id}")]
         [EnableCors("AllowReactCors")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<ProductDto> Get(string id)
         {
-            return "value";
+            return Ok(_productsService.Get(id));
         }
 
         [HttpPost]
@@ -41,14 +41,17 @@ namespace DellChallenge.D1.Api.Controllers
 
         [HttpDelete("{id}")]
         [EnableCors("AllowReactCors")]
-        public void Delete(int id)
+        public ActionResult Delete(string id)
         {
+            _productsService.Delete(id);
+            return Ok();
         }
 
         [HttpPut("{id}")]
         [EnableCors("AllowReactCors")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<ProductDto> Put(string id, [FromBody] NewProductDto value)
         {
+            return Ok(_productsService.Update(id, value));
         }
     }
 }

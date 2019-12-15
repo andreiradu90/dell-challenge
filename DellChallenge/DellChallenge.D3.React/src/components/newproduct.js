@@ -44,7 +44,9 @@ class NewProduct extends Component {
     });
   };
 
-  render() {
+    render() {
+        const { Name } = this.state;
+        const isValid = Name.length > 0;
     return (
       <form onSubmit={this.handleSubmit}>
         <h4>Add new Product</h4>
@@ -85,7 +87,7 @@ class NewProduct extends Component {
           />
         </div>
         <div className="form-group">
-          <button className="btn btn-primary">Submit</button>
+                <button disabled={!isValid} className="btn btn-primary">Submit</button>
         </div>
         <Validation />
       </form>

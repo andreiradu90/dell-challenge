@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Validation from "../validation";
+import { Link } from 'react-router-dom';
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -33,6 +34,20 @@ class ProductList extends React.Component {
       );
   }
 
+    delete(id) {
+        fetch("http://localhost:5000/api/products/" + id, {
+            method: "DELETE",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            mode: "cors"
+        })
+            .then(res => res.json())
+            .then(this.componentDidMount())
+            .catch(err => console.log(err));
+    }
+
   render() {
     const { error, isLoaded, items } = this.state;
     if (error) {
@@ -43,9 +58,11 @@ class ProductList extends React.Component {
       return (
           <ul>
             {items.map(item => (
-              <li key={item.id}>
+              <div><li key={item.id}>
                 {item.name} - {item.category}
-              </li>
+                  </li>
+                      <Link to={"/edit/" + item.id} className="btn btn-primary">Edit</Link>
+                      <button onClick={() => this.delete(item.id)} className="btn btn-danger">Delete</button></div>
             ))}
           </ul>
       );
